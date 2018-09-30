@@ -1,0 +1,773 @@
+{
+	"info": {
+		"_postman_id": "bfb563a3-9d4d-4a20-a329-15b5ce11bea4",
+		"name": "Entry_task",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "参数校验",
+			"item": [
+				{
+					"name": "参数a不合法，b合法",
+					"item": [
+						{
+							"name": "参数a为字母",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "f4236d51-20d4-46c0-9f87-667ae789e23d",
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Body matches string\", function () {",
+											"     var res=JSON.parse(responseBody);",
+											"    pm.expect(res.reference).to.include(\"\");",
+											"    //pm.expect(pm.response.text()).to.include(\"\\\"reference\\\": \\\"NO.100 is 中文\\\"\");",
+											"    pm.expect(pm.response.text()).to.include(\"\\\"err_msg\\\":\\\"empry or wrong params\\\"\");",
+											"    pm.expect(pm.response.text()).to.include(\"\\\"err_code\\\":21\");",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "127.0.0.1:9999/api?a=a&b=hello",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "9999",
+									"path": [
+										"api"
+									],
+									"query": [
+										{
+											"key": "a",
+											"value": "a"
+										},
+										{
+											"key": "b",
+											"value": "hello"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "参数a为特殊符号",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b362e411-c4d7-43dc-b84b-3b378787c91f",
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Body matches string\", function () {",
+											"     var res=JSON.parse(responseBody);",
+											"    pm.expect(res.reference).to.include(\"\");",
+											"    //pm.expect(pm.response.text()).to.include(\"\\\"reference\\\": \\\"NO.100 is 中文\\\"\");",
+											"    pm.expect(pm.response.text()).to.include(\"\\\"err_msg\\\":\\\"empry or wrong params\\\"\");",
+											"    pm.expect(pm.response.text()).to.include(\"\\\"err_code\\\":21\");",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "127.0.0.1:9999/api?a=@@%&b=hello",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "9999",
+									"path": [
+										"api"
+									],
+									"query": [
+										{
+											"key": "a",
+											"value": "@@%"
+										},
+										{
+											"key": "b",
+											"value": "hello"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "参数a为中文",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "701a5f63-6f26-4790-a05a-bd40650edd7a",
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Body matches string\", function () {",
+											"     var res=JSON.parse(responseBody);",
+											"    pm.expect(res.reference).to.include(\"\");",
+											"    //pm.expect(pm.response.text()).to.include(\"\\\"reference\\\": \\\"NO.100 is 中文\\\"\");",
+											"    pm.expect(pm.response.text()).to.include(\"\\\"err_msg\\\":\\\"empry or wrong params\\\"\");",
+											"    pm.expect(pm.response.text()).to.include(\"\\\"err_code\\\":21\");",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "127.0.0.1:9999/api?a=你好&b=hello",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "9999",
+									"path": [
+										"api"
+									],
+									"query": [
+										{
+											"key": "a",
+											"value": "你好"
+										},
+										{
+											"key": "b",
+											"value": "hello"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "参数a为数字加字母",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a66bd90b-0882-4fb4-a2cc-7605058fc8e0",
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Body matches string\", function () {",
+											"     var res=JSON.parse(responseBody);",
+											"    pm.expect(res.reference).to.include(\"\");",
+											"    //pm.expect(pm.response.text()).to.include(\"\\\"reference\\\": \\\"NO.100 is 中文\\\"\");",
+											"    pm.expect(pm.response.text()).to.include(\"\\\"err_msg\\\":\\\"empry or wrong params\\\"\");",
+											"    pm.expect(pm.response.text()).to.include(\"\\\"err_code\\\":21\");",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "127.0.0.1:9999/api?a=45ddd&b=hello",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "9999",
+									"path": [
+										"api"
+									],
+									"query": [
+										{
+											"key": "a",
+											"value": "45ddd"
+										},
+										{
+											"key": "b",
+											"value": "hello"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "参数a和b都为空",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "724157ad-571f-4f18-8ae3-ea9f64ed4831",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"     var res=JSON.parse(responseBody);",
+									"    pm.expect(res.reference).to.include(\"\");",
+									"    //pm.expect(pm.response.text()).to.include(\"\\\"reference\\\": \\\"NO.100 is 中文\\\"\");",
+									"    pm.expect(pm.response.text()).to.include(\"\\\"err_msg\\\":\\\"empry or wrong params\\\"\");",
+									"    pm.expect(pm.response.text()).to.include(\"\\\"err_code\\\":21\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "127.0.0.1:9999/api?a=&b=",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9999",
+							"path": [
+								"api"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": ""
+								},
+								{
+									"key": "b",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "参数a为空b合法",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "01e8ab1e-b303-466b-be7b-162405f8e531",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"     var res=JSON.parse(responseBody);",
+									"    pm.expect(res.reference).to.include(\"\");",
+									"    //pm.expect(pm.response.text()).to.include(\"\\\"reference\\\": \\\"NO.100 is 中文\\\"\");",
+									"    pm.expect(pm.response.text()).to.include(\"\\\"err_msg\\\":\\\"empry or wrong params\\\"\");",
+									"    pm.expect(pm.response.text()).to.include(\"\\\"err_code\\\":21\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "127.0.0.1:9999/api?b=hello",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9999",
+							"path": [
+								"api"
+							],
+							"query": [
+								{
+									"key": "b",
+									"value": "hello"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "参数b为空a合法",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6c87fec0-8836-4e4c-afcc-4e0b9f5c870a",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"     var res=JSON.parse(responseBody);",
+									"    pm.expect(res.reference).to.include(\"\");",
+									"    //pm.expect(pm.response.text()).to.include(\"\\\"reference\\\": \\\"NO.100 is 中文\\\"\");",
+									"    pm.expect(pm.response.text()).to.include(\"\\\"err_msg\\\":\\\"empry or wrong params\\\"\");",
+									"    pm.expect(pm.response.text()).to.include(\"\\\"err_code\\\":21\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "127.0.0.1:9999/api?a=1",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9999",
+							"path": [
+								"api"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "参数多传，a和b合法，多传c",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "88bb039c-cc58-43cb-91dd-70cd4916f6b9",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"     var res=JSON.parse(responseBody);",
+									"    pm.expect(res.reference).to.include(\"\");",
+									"    //pm.expect(pm.response.text()).to.include(\"\\\"reference\\\": \\\"NO.100 is 中文\\\"\");",
+									"    pm.expect(pm.response.text()).to.include(\"\\\"err_msg\\\":\\\"empry or wrong params\\\"\");",
+									"    pm.expect(pm.response.text()).to.include(\"\\\"err_code\\\":21\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "127.0.0.1:9999/api?a=1&b=abc&c=dd",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9999",
+							"path": [
+								"api"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": "1"
+								},
+								{
+									"key": "b",
+									"value": "abc"
+								},
+								{
+									"key": "c",
+									"value": "dd"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "正常场景",
+			"item": [
+				{
+					"name": "参数a为0，b合法",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "15a05f62-9826-4fd5-b148-8408865c77cd",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"\\\"reference\\\":\\\"NO.2 is hello\\\"\");",
+									"    pm.expect(pm.response.text()).to.include(\"\\\"err_msg\\\":\\\"success\\\"\");",
+									"    pm.expect(pm.response.text()).to.include(\"\\\"err_code\\\":0\");",
+									"});",
+									"/*pm.test(\"Body matches string\", function () {",
+									"    var res=JSON.parse(responseBody);",
+									"    pm.expect(res.err_code).to.include(\"0\");",
+									"    //pm.expect(res.err_msg).to.include(\"success\");",
+									"    pm.expect(res.reference).to.include(\"NO.2 is hello\");",
+									"});*/"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "127.0.0.1:9999/api?a=2&b=hello",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9999",
+							"path": [
+								"api"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": "2"
+								},
+								{
+									"key": "b",
+									"value": "hello"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "参数a为负数，b合法",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "feae49e2-2e0a-4c5b-b370-b131fadff296",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"\\\"reference\\\":\\\"NO.-100 is hello\\\"\");",
+									"    pm.expect(pm.response.text()).to.include(\"\\\"err_msg\\\":\\\"success\\\"\");",
+									"    pm.expect(pm.response.text()).to.include(\"\\\"err_code\\\":0\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "127.0.0.1:9999/api?a=-100&b=hello",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9999",
+							"path": [
+								"api"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": "-100"
+								},
+								{
+									"key": "b",
+									"value": "hello"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "参数a为超过int大小的值，b合法",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5af294fd-8714-466c-9a07-0221b0e2b0ca",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"\\\"reference\\\":\\\"NO.2147483649 is hello\\\"\");",
+									"    pm.expect(pm.response.text()).to.include(\"\\\"err_msg\\\":\\\"success\\\"\");",
+									"    pm.expect(pm.response.text()).to.include(\"\\\"err_code\\\":0\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "127.0.0.1:9999/api?a=2147483649&b=hello",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9999",
+							"path": [
+								"api"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": "2147483649"
+								},
+								{
+									"key": "b",
+									"value": "hello"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "参数a合法，b为特殊符号",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "813fefe1-cb32-4811-8b35-c8051cbecbb1",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"\\\"reference\\\":\\\"NO.100 is {}\\\"\");",
+									"    pm.expect(pm.response.text()).to.include(\"\\\"err_msg\\\":\\\"success\\\"\");",
+									"    pm.expect(pm.response.text()).to.include(\"\\\"err_code\\\":0\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "127.0.0.1:9999/api?a=100&b={}",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9999",
+							"path": [
+								"api"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": "100"
+								},
+								{
+									"key": "b",
+									"value": "{}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "参数a合法，b为数字",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91fe1e4d-4852-431f-839f-e18c8217b3f9",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"\\\"reference\\\":\\\"NO.100 is 455\\\"\");",
+									"    pm.expect(pm.response.text()).to.include(\"\\\"err_msg\\\":\\\"success\\\"\");",
+									"    pm.expect(pm.response.text()).to.include(\"\\\"err_code\\\":0\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "127.0.0.1:9999/api?a=100&b=455",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9999",
+							"path": [
+								"api"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": "100"
+								},
+								{
+									"key": "b",
+									"value": "455"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "参数a合法，b为中文",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6baf4bba-1f32-4df8-8908-4dc0739f4cca",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"     var res=JSON.parse(responseBody);",
+									"    pm.expect(res.reference).to.include(\"NO.100 is 中文\");",
+									"    pm.expect(pm.response.text()).to.include(\"\\\"reference\\\":\\\"NO.100 is 中文\\\"\");",
+									"    pm.expect(pm.response.text()).to.include(\"\\\"err_msg\\\":\\\"success\\\"\");",
+									"    pm.expect(pm.response.text()).to.include(\"\\\"err_code\\\":0\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "127.0.0.1:9999/api?a=100&b=中文",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9999",
+							"path": [
+								"api"
+							],
+							"query": [
+								{
+									"key": "a",
+									"value": "100"
+								},
+								{
+									"key": "b",
+									"value": "中文"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
